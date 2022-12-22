@@ -2,7 +2,6 @@ import unittest
 from handle_content import *
 from mapping import Mapper
 
-
 class TestBackpackParsing(unittest.TestCase):
     def test_file_operation(self):
         data = unload_data_from_file("resources/test_data.txt")
@@ -33,6 +32,18 @@ class TestBackpackParsing(unittest.TestCase):
 
         self.assertEqual(135, map.get_priority_total())
 
+    def test_groups_of_elves(self):
+        print("Testing even groups")
+        datas = make_groups_of_three(unload_data_from_file("resources/test_data_uneven.txt"))
+        self.assertEqual(len(datas), 2)
 
+        for data in datas:
+            self.assertEqual(len(data), 3)
+
+    def test_uneven_groups_of_elves(self):
+        print("Testing uneven groups")
+        datas = make_groups_of_three(unload_data_from_file("resources/test_data.txt"))
+        print(datas)
+        
 if __name__ == '__main__':
     unittest.main()

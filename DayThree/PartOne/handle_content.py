@@ -14,8 +14,18 @@ def list_backpacks(data=''):
 
     return data.splitlines()
 
-def groups_of_three(data=[]):
-    data.
+def make_groups_of_three(data=''):
+    groups = 3
+    split_data = list_backpacks(data)
+    grouped_data = []
+
+    for i in range(0, len(split_data), groups):
+        grouped_data.append(split_data[i:i + groups])
+
+    return grouped_data
+
+def check_for_even_groups(data=[]):
+    return len(data) % 3 == 0
 
 def search_for_duplicates(data=[]):
     # Get the pointer to the center of the string
@@ -28,3 +38,7 @@ def search_for_duplicates(data=[]):
 
     # Returns duplicates
     return set_of_left_items.intersection(set_of_right_items)
+
+
+def sort_data(data=[]):
+    return
