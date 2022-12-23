@@ -14,19 +14,41 @@ def list_backpacks(data=''):
 
     return data.splitlines()
 
-def make_groups_of_three(data=''):
+
+def make_groups_of_three(data=[]):
     groups = 3
-    split_data = list_backpacks(data)
     grouped_data = []
 
-    for i in range(0, len(split_data), groups):
-        grouped_data.append(split_data[i:i + groups])
+    for i in range(0, len(data), groups):
+        grouped_data.append(data[i:i + groups])
 
     return grouped_data
+
 
 def check_for_even_groups(data=[]):
     return len(data) % 3 == 0
 
+def split_string_data(data=''):
+    return list(data)
+
+# TODO: Make this function more flexible
+def find_common_items(grouped_data=[]):
+    common_items = []
+    size_of_group = len(grouped_data)
+    first_elf = set()
+    second_elf = set()
+    third_elf = set()
+
+
+    # Take the grouped data
+    for group in grouped_data:
+        firstElf = set(group[0])
+        secondElf = set(group[1])
+        thirdElf = set(group[2])
+
+        common_items.append(list(firstElf.intersection(secondElf, thirdElf)))
+
+    return common_items
 def search_for_duplicates(data=[]):
     # Get the pointer to the center of the string
     center_ptr = int(len(data) / 2)

@@ -34,12 +34,25 @@ class TestBackpackParsing(unittest.TestCase):
 
     def test_groups_of_elves(self):
         print("Testing even groups")
-        datas = make_groups_of_three(unload_data_from_file("resources/test_data_uneven.txt"))
+        datas = make_groups_of_three(unload_data_from_file("resources/test_data.txt"))
         self.assertEqual(len(datas), 2)
 
         for data in datas:
             self.assertEqual(len(data), 3)
 
+    def test_for_common_items(self):
+        print("Test for common items")
+        backpacks = list_backpacks(unload_data_from_file("resources/test_data.txt"))
+        datas = make_groups_of_three(backpacks)
+
+        # Here we will have two groups. We will test these groups
+        common_items = find_common_items(datas)
+
+        print(common_items)
+        self.assertEqual(common_items[0][0], 'r')
+        self.assertEqual(common_items[1][0], 'Z')
+
+    # Negative Tests
     def test_uneven_groups_of_elves(self):
         print("Testing uneven groups")
         datas = make_groups_of_three(unload_data_from_file("resources/test_data.txt"))

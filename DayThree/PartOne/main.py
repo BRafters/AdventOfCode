@@ -4,8 +4,9 @@ from handle_content import *
 
 def main(args):
     backpacks = list_backpacks(unload_data_from_file(args))
-    run_part_one(args)
-    run_part_two(args)
+    run_part_one(backpacks)
+    run_part_two(backpacks)
+
 
 def run_part_one(backpacks=[]):
     # Read in input from a file
@@ -24,17 +25,24 @@ def run_part_one(backpacks=[]):
 
     print(mapper.get_priority_total())
 
+
 def run_part_two(backpacks=[]):
+    mapper = Mapper()
+
     # Get the grouped data
     grouped_data = make_groups_of_three(backpacks)
+    common_items = find_common_items(grouped_data)
 
-    # Loop over the list of groups
-    for group in grouped_data:
-        # We have 3 elements in each group here
-        group[0] = sorted(group[0])
-        group[1] = sorted(group[1])
-        group[2] = sorted(group[2])
+    for item in common_items:
+        if len(item) == 0:
+            continue
 
-        
+        if item[0] == [] or item[0] == None:
+            continue
+
+        mapper.inc_total_priorities(item[0])
+
+    print(mapper.get_priority_total())
+
 if __name__ == '__main__':
     main("resources/input_data.txt")  # Hard-coded params
